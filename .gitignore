@@ -1,0 +1,22 @@
+# Java
+backend/target/
+*.log
+
+# H2 persistence
+backend/data/
+data/
+*.mv.db
+*.trace.db
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+*.tsbuildinfo
+
+# IDE and OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

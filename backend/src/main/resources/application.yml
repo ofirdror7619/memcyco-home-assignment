@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: scheduling
+  datasource:
+    url: ${DB_URL:jdbc:h2:file:./data/scheduling;AUTO_SERVER=TRUE}
+    driver-class-name: org.h2.Driver
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:quartz-schema-h2.sql
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    overwrite-existing-jobs: false
+    wait-for-jobs-to-complete-on-shutdown: true
+    properties:
+      org.quartz.scheduler.instanceName: MemcycoScheduler
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+      org.quartz.jobStore.tablePrefix: QRTZ_
+      org.quartz.jobStore.isClustered: false
+      org.quartz.threadPool.threadCount: 5
+
+server:
+  port: ${SERVER_PORT:8080}
+
+scheduling:
+  timezone: UTC
